@@ -30,3 +30,7 @@ struct WideIntWrapper<T, const N: usize> {
 impl<T, const N: usize> AsRef<[T]> for WideIntWrapper<T, N> {
   fn as_ref(&self) -> &[T] { &self.buf }
 }
+
+impl<T, const N: usize> AsMut<[T]> for WideIntWrapper<T, N> {
+  fn as_mut(&mut self) -> &mut [T] { &mut self.buf }
+}
