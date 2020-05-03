@@ -15,9 +15,6 @@ use sign::IsSigned;
 ///
 /// S - sign type
 ///
-///
-/// # Panic
-///
 pub(crate) struct RawInt<U, T, S> {
   buf: T,
   marker: PhantomData<U>,
@@ -40,3 +37,6 @@ impl<U, T: AsRef<[U]>, S: IsSigned> From<&str> for RawInt<U, T, S> {
   }
 }
 
+impl<U, T: AsRef<[U]>, S: IsSigned> From<u8> for RawInt<U, T, S> {
+  fn from(value: u8) -> Self { unimplemented!() }
+}

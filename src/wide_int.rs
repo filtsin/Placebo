@@ -10,20 +10,20 @@ pub use crate::raw_int::sign::{Signed, Unsigned};
 ///
 /// S for representing signed or unsigned number (Use Signed or Unsigned types).
 ///
-/// N is count of bits
+/// N is size of array with type T
 ///
 /// ```
 /// use placebo::wide_int::{WideInt, Signed, Unsigned};
 /// 
-/// assert_eq!(std::mem::size_of::<WideInt<u32, Signed, 128>>(), 24);
-/// assert_eq!(std::mem::size_of::<WideInt<u64, Unsigned, 256>>(), 32);
+/// assert_eq!(std::mem::size_of::<WideInt<u32, Signed, 2>>(), 8);
+/// assert_eq!(std::mem::size_of::<WideInt<u64, Unsigned, 2>>(), 16);
 /// ```
 pub struct WideInt<T, S, const N: usize> {
   buf: RawInt<T, WideIntWrapper<T, N>, S>
 }
 
+/// Wrapper for RawInt support
 struct WideIntWrapper<T, const N: usize> {
-  /// Not current implementation...
   buf: [T; N]
 }
 
