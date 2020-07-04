@@ -1,5 +1,10 @@
-pub trait IsBuiltNum {}
-pub trait IsBuiltUnsigned {}
+//!
+use std::ops::{Add, Sub, Mul, Div};
+
+/// Trait for u8, u16, u32, u64 types
+pub trait IsU8163264 : Copy + Add + Sub + Mul + Div {}
+/// Trait for u8, u16, u32 types
+pub trait IsU81632 : IsU8163264 {}
 
 macro_rules! impl_trait {
   ($tr: ident, $ty: ident) => {
@@ -11,5 +16,5 @@ macro_rules! impl_trait {
   }
 }
 
-impl_trait!(IsBuiltNum, i8, u8, i16, u16, i32, u32, i64, u64);
-impl_trait!(IsBuiltUnsigned, u8, u16, u32, u64);
+impl_trait!(IsU8163264, u8, u16, u32, u64);
+impl_trait!(IsU81632, u8, u16, u32);

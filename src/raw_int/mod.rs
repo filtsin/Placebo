@@ -1,10 +1,10 @@
+//!
 pub mod sign;
 pub mod num_traits;
 
 use std::marker::PhantomData;
 use sign::IsSigned;
-use num_traits::IsBuiltUnsigned;
-
+use num_traits::IsU81632;
 
 /// Structure for raw integer with common operations
 ///
@@ -40,6 +40,6 @@ impl<U, T: AsRef<[U]>, S: IsSigned> From<&str> for RawInt<U, T, S> {
   }
 }
 
-impl<U, T: AsRef<[U]>, S: IsSigned, N: IsBuiltUnsigned> From<N> for RawInt<U, T, S> {
+impl<U, T: AsRef<[U]>, S: IsSigned, N: IsU81632> From<N> for RawInt<U, T, S> {
   fn from(value: N) -> Self { unimplemented!() }
 }

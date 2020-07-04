@@ -9,4 +9,3 @@ pub mod wide_int;
 
 #[cfg(feature = "generic-array")]
 pub mod wide_int_gen_array;
-
