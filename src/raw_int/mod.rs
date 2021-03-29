@@ -24,22 +24,14 @@ pub(crate) struct RawInt<U, T, S> {
   sign: PhantomData<S>
 }
 
+// TODO! const fn only if feature `const` is enable
+//
 impl<U, T: AsRef<[U]> + AsMut<[U]>, S: IsSigned> RawInt<U, T, S> {
-  fn new(buf: T) -> Self {
+  /*const*/ fn new(buf: T) -> Self {
     RawInt {
       buf,
       marker: PhantomData,
       sign: PhantomData
     }
   }
-}
-
-impl<U, T: AsRef<[U]>, S: IsSigned> From<&str> for RawInt<U, T, S> {
-  fn from(string: &str) -> Self {
-    unimplemented!()
-  }
-}
-
-impl<U, T: AsRef<[U]>, S: IsSigned, N: IsU81632> From<N> for RawInt<U, T, S> {
-  fn from(value: N) -> Self { unimplemented!() }
 }
