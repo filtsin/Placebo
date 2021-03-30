@@ -6,7 +6,8 @@ edition = "2018"
 
 [dependencies]
 serde = { version = "1.0", optional = true, features = ["derive"]}
+make_const = { path = "make_const" }
 
 [features]
 default = ["serde"]
-const = []
+const = ["make_const/enabled"]

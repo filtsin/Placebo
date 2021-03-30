@@ -1,6 +1,6 @@
 //!
-use crate::raw_int::RawInt;
 pub use crate::raw_int::sign::{Signed, Unsigned};
+use crate::raw_int::RawInt;
 
 /// Structure for creating wide integer
 ///
@@ -15,23 +15,27 @@ pub use crate::raw_int::sign::{Signed, Unsigned};
 ///
 /// ```
 /// use placebo::wide_int::{WideInt, Signed, Unsigned};
-/// 
+///
 /// assert_eq!(std::mem::size_of::<WideInt<u32, Signed, 2>>(), 8);
 /// assert_eq!(std::mem::size_of::<WideInt<u64, Unsigned, 2>>(), 16);
 /// ```
 pub struct WideInt<T, S, const N: usize> {
-  buf: RawInt<T, WideIntWrapper<T, N>, S>
+    buf: RawInt<T, WideIntWrapper<T, N>, S>,
 }
 
 /// Wrapper for RawInt support
 struct WideIntWrapper<T, const N: usize> {
-  buf: [T; N]
+    buf: [T; N],
 }
 
 impl<T, const N: usize> AsRef<[T]> for WideIntWrapper<T, N> {
-  fn as_ref(&self) -> &[T] { &self.buf }
+    fn as_ref(&self) -> &[T] {
+        &self.buf
+    }
 }
 
 impl<T, const N: usize> AsMut<[T]> for WideIntWrapper<T, N> {
-  fn as_mut(&mut self) -> &mut [T] { &mut self.buf }
+    fn as_mut(&mut self) -> &mut [T] {
+        &mut self.buf
+    }
 }

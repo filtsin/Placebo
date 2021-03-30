@@ -1,10 +1,12 @@
 //!
-pub mod sign;
 pub mod num_traits;
+pub mod sign;
 
-use std::marker::PhantomData;
-use sign::IsSigned;
 use num_traits::IsU81632;
+use sign::IsSigned;
+use std::marker::PhantomData;
+
+use make_const::const_if_feature_enabled;
 
 /// Structure for raw integer with common operations
 ///
@@ -19,19 +21,19 @@ use num_traits::IsU81632;
 /// S - sign type (impl sign::IsSigned)
 ///
 pub(crate) struct RawInt<U, T, S> {
-  buf: T,
-  marker: PhantomData<U>,
-  sign: PhantomData<S>
+    buf: T,
+    marker: PhantomData<U>,
+    sign: PhantomData<S>,
 }
 
-// TODO! const fn only if feature `const` is enable
-//
+
 impl<U, T: AsRef<[U]> + AsMut<[U]>, S: IsSigned> RawInt<U, T, S> {
-  /*const*/ fn new(buf: T) -> Self {
-    RawInt {
-      buf,
-      marker: PhantomData,
-      sign: PhantomData
+    #[const_if_feature_enabled]
+    fn new(buf: T) -> Self {
+        RawInt {
+            buf,
+            marker: PhantomData,
+            sign: PhantomData,
+        }
     }
-  }
 }
